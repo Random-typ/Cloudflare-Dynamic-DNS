@@ -40,14 +40,15 @@ void loadConfig()
     */
     if (!std::filesystem::exists("CloudflareDDNSConfig.json"))
     {
-        std::ofstream("CloudflareDDNSConfig.json");
+
+        exit(1);
     }
     std::fstream fs("CloudflareDDNSConfig.json");
 
-    std::string lastip((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
+    std::string configraw((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
     fs.close();
 
-    RJSON::JSONElement config = RJSON::RJSON::load(lastip);
+    RJSON::JSONElement config = RJSON::RJSON::load(configraw);
 
     if (!config.hasChild("token"))
     {
