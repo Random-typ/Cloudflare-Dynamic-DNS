@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -57,6 +59,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.label3);
@@ -68,6 +71,17 @@
             this.panel1.Size = new System.Drawing.Size(720, 462);
             this.panel1.TabIndex = 0;
             this.panel1.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(32, 389);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(191, 34);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "IMPORTANT:\r\nOnly \"A\" types are supported.";
+            this.label4.Visible = false;
             // 
             // button1
             // 
@@ -130,6 +144,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Controls.Add(this.label13);
@@ -147,9 +162,20 @@
             this.panel2.Size = new System.Drawing.Size(720, 462);
             this.panel2.TabIndex = 1;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(20, 400);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(191, 34);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "IMPORTANT:\r\nOnly \"A\" types are supported.\r\n";
+            this.label5.Visible = false;
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(20, 387);
+            this.button2.Location = new System.Drawing.Point(20, 364);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 19;
@@ -199,7 +225,7 @@
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(20, 69);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 312);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 285);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // label12
@@ -312,5 +338,7 @@
         private System.Windows.Forms.Timer timer1;
         private RichTextBox richTextBox1;
         private Button button2;
+        private Label label4;
+        private Label label5;
     }
 }

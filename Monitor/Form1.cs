@@ -52,17 +52,19 @@ namespace Monitor
                     foreach (var zone in json["result"].AsArray())
                     {
                         string id = zone["id"].ToString();
-                        for (int i = 0; i < configjson["zones"].AsArray().Count; i++)
+                        bool ischecked = false;
+                        foreach (var allowedzone in configjson["zones"].AsArray())
                         {
-                            if (configjson["zones"].AsArray()[i].ToString() == id)
+                            if (allowedzone.ToString() == id)
                             {
+                                ischecked = true;
                                 AddZone(zone["name"].ToString(), id, true);
                                 break;
                             }
-                            if (i + 1 == configjson["zones"].AsArray().Count)
-                            {
-                                AddZone(zone["name"].ToString(), id, false);
-                            }
+                        }
+                        if (!ischecked)
+                        {
+                            AddZone(zone["name"].ToString(), id, false);
                         }
                     }
                 }
@@ -212,6 +214,7 @@ namespace Monitor
 
         private void button4_Click(object sender, EventArgs e)
         {
+            WriteConfig();
             Process.Start("Cloudflare Dynamic DNS.exe");
             WriteOut("Started Dynamic DNS.");
         }
