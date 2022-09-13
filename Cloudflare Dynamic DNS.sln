@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cloudflare Dynamic DNS", "Cloudflare Dynamic DNS\Cloudflare Dynamic DNS.vcxproj", "{DD701F29-4053-4749-9D98-0B050658F997}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitor", "Monitor\Monitor.csproj", "{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monitor", "Monitor\Monitor.csproj", "{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +14,11 @@ Global
 		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release Background|Any CPU = Release Background|Any CPU
+		Release Background|ARM = Release Background|ARM
+		Release Background|ARM64 = Release Background|ARM64
+		Release Background|x64 = Release Background|x64
+		Release Background|x86 = Release Background|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|ARM64 = Release|ARM64
@@ -31,6 +36,16 @@ Global
 		{DD701F29-4053-4749-9D98-0B050658F997}.Debug|x64.Build.0 = Debug|x64
 		{DD701F29-4053-4749-9D98-0B050658F997}.Debug|x86.ActiveCfg = Debug|Win32
 		{DD701F29-4053-4749-9D98-0B050658F997}.Debug|x86.Build.0 = Debug|Win32
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|Any CPU.ActiveCfg = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|Any CPU.Build.0 = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|ARM.ActiveCfg = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|ARM.Build.0 = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|ARM64.ActiveCfg = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|ARM64.Build.0 = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|x64.ActiveCfg = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|x64.Build.0 = Release Background|x64
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|x86.ActiveCfg = Release Background|Win32
+		{DD701F29-4053-4749-9D98-0B050658F997}.Release Background|x86.Build.0 = Release Background|Win32
 		{DD701F29-4053-4749-9D98-0B050658F997}.Release|Any CPU.ActiveCfg = Release|x64
 		{DD701F29-4053-4749-9D98-0B050658F997}.Release|Any CPU.Build.0 = Release|x64
 		{DD701F29-4053-4749-9D98-0B050658F997}.Release|ARM.ActiveCfg = Release|x64
@@ -51,6 +66,16 @@ Global
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Debug|x64.Build.0 = Debug|Any CPU
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Debug|x86.Build.0 = Debug|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|Any CPU.ActiveCfg = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|Any CPU.Build.0 = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|ARM.ActiveCfg = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|ARM.Build.0 = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|ARM64.ActiveCfg = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|ARM64.Build.0 = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|x64.ActiveCfg = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|x64.Build.0 = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|x86.ActiveCfg = Release|Any CPU
+		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release Background|x86.Build.0 = Release|Any CPU
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87B2641D-3FCC-4301-8BB2-DAF85B943C6D}.Release|ARM.ActiveCfg = Release|Any CPU

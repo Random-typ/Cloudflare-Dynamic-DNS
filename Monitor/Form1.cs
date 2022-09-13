@@ -1,5 +1,7 @@
 using System.Diagnostics;
 using System.Net;
+using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Nodes;
 
@@ -152,7 +154,30 @@ namespace Monitor
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://dash.cloudflare.com/profile/api-tokens");
+            try
+            {
+                Process.Start("https://dash.cloudflare.com/profile/api-tokens");
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Process.Start(new ProcessStartInfo("https://dash.cloudflare.com/profile/api-tokens") { UseShellExecute = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", "https://dash.cloudflare.com/profile/api-tokens");
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", "https://dash.cloudflare.com/profile/api-tokens");
+                }
+                else
+                {
+                    throw;
+                }
+            }
         }
 
         private void label9_Click(object sender, EventArgs e)
