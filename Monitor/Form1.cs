@@ -5,7 +5,9 @@ using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.IO;
-
+using System.Net;
+using System.IO.Compression;
+using Microsoft.VisualBasic;
 
 namespace Monitor
 {
@@ -13,11 +15,79 @@ namespace Monitor
     {
         public const string ConfigFile = "CloudflareDDNSConfig.json";
 
-        public void Update()
+        public async void Update()
         {
+            double InstalledVersion = 0;
 
+            string versionsURL = "https://raw.githubusercontent.com/Random-typ/Cloudflare-Dynamic-DNS/master/Monitor/versions.json?";
 
+            if (File.Exists("update.bat"))
+            {
+                File.Delete("update.bat");
+            }
 
+            if (File.Exists("update"))
+            {
+                File.Delete("update");
+            }
+
+            HttpClient httpClient = new HttpClient();
+
+            string content;
+            try
+            {
+                content = await httpClient.GetStringAsync(versionsURL);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
+            content = "{\r\n  \"latest\": 1.0,\r\n  \"versions\": [\r\n    {\r\n      \"version\": 1.0,\r\n      \"skipable\": false,\r\n      \"update\": \"https://aquamarinband.de/Cloudflare.Dynamic.DNS.1.0.zip\"\r\n    }\r\n  ]\r\n}";
+            if (content == null)
+            {
+                return;
+            }
+
+            JsonNode json = JsonObject.Parse(content);
+            double latest = Convert.ToDouble(json["latest"].ToString());
+            if (latest == InstalledVersion)
+            {// newest version is already installed
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("An update is available. Would you like to update the application now?", "Update Available", MessageBoxButtons.OKCancel);
+            if (DialogResult.OK != dr)
+            {
+                return;
+            }
+
+            foreach (var item in json["versions"].AsArray())
+            {
+                double version = Convert.ToDouble(item["version"].ToString());
+                if (version > InstalledVersion && !Convert.ToBoolean(item["skipable"].ToString()) || version == latest)
+                {
+                    try
+                    {
+                        Directory.CreateDirectory("update");
+                        WebClient web = new WebClient();
+                        web.Headers.Add("User-Agent", "Cloudflare DDNS Update");
+                        web.DownloadFile(new Uri(item["update"].ToString()), "Update.zip");
+                        ZipFile.ExtractToDirectory("Update.zip", "/update");
+
+                        byte[] updatebat = Encoding.ASCII.GetBytes("XCOPY /K /Y \"update\" \"\"\npause\nMonitor.exe");
+                        File.WriteAllBytes("update.bat", updatebat);
+                        Process.Start("update.bat");
+                        this.Close();
+                        return;
+                    }
+                    catch (Exception)
+                    {
+                        continue;
+                    }
+                }
+            }
+            MessageBox.Show("Application cannot be updated. Try again later.");
         }
 
         public void WriteOut(string _message)
@@ -203,7 +273,8 @@ namespace Monitor
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        { 
+        {
+            Update();
             ClientSize = new Size(panel2.Size.Width + 20, panel2.Size.Height + 40);
             MaximumSize = ClientSize;
             MinimumSize = ClientSize;
