@@ -1,13 +1,9 @@
 using System.Diagnostics;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Nodes;
-using System.IO;
-using System.Net;
 using System.IO.Compression;
-using Microsoft.VisualBasic;
 
 namespace Monitor
 {
@@ -341,6 +337,20 @@ namespace Monitor
         private void button6_Click(object sender, EventArgs e)
         {
             Process.Start("/logs/");
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            if (label4.Text == "show")
+            {
+                label4.Text = "hide";
+                textBox2.UseSystemPasswordChar = false;
+            }
+            else if (label4.Text == "hide")
+            {
+                label4.Text = "show";
+                textBox2.UseSystemPasswordChar = true;
+            }
         }
     }
 }
