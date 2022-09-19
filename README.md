@@ -3,7 +3,7 @@ With this application you can update your DNS records on Cloudflare dynamically.
 using Cloudflare's services.
 
 # Install
-In less than ten minutes you can install and configure this application. Just click HERE to download the latest version.
+In less than ten minutes you can install and configure this application. Just click [HERE](https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases) to download the latest version.
 
 # Configuration
 The configuration is easy thanks to the user interface:
