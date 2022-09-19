@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Text.Json.Nodes;
+using System.IO;
 
 
 namespace Monitor
@@ -11,6 +12,13 @@ namespace Monitor
     public partial class Form1 : Form
     {
         public const string ConfigFile = "CloudflareDDNSConfig.json";
+
+        public void Update()
+        {
+
+
+
+        }
 
         public void WriteOut(string _message)
         {
@@ -195,7 +203,7 @@ namespace Monitor
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        { 
             ClientSize = new Size(panel2.Size.Width + 20, panel2.Size.Height + 40);
             MaximumSize = ClientSize;
             MinimumSize = ClientSize;
@@ -257,6 +265,11 @@ namespace Monitor
         {
             ClearZones();
             LoadConfig();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Process.Start("/logs/");
         }
     }
 }
