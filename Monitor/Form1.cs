@@ -11,7 +11,7 @@ namespace Monitor
     {
         public const string ConfigFile = "CloudflareDDNSConfig.json";
 
-        public async void Update()
+        public async void UpdateApp()
         {
             double InstalledVersion = 0;
 
@@ -39,7 +39,6 @@ namespace Monitor
                 return;
             }
             
-            content = "{\r\n  \"latest\": 1.0,\r\n  \"versions\": [\r\n    {\r\n      \"version\": 1.0,\r\n      \"skipable\": false,\r\n      \"update\": \"https://aquamarinband.de/Cloudflare.Dynamic.DNS.1.0.zip\"\r\n    }\r\n  ]\r\n}";
             if (content == null)
             {
                 return;
@@ -270,7 +269,7 @@ namespace Monitor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Update();
+            UpdateApp();
             ClientSize = new Size(panel2.Size.Width + 20, panel2.Size.Height + 40);
             MaximumSize = ClientSize;
             MinimumSize = ClientSize;
