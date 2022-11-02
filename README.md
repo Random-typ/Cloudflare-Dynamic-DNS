@@ -7,7 +7,7 @@ using Cloudflare's services.
 In less than ten minutes you can install and configure your Cloudflare dynamic DNS. Just click [HERE](https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases) and download the latest version.  
 
 # Building yourself with Visual Studio
-Just dowblosd the repo and open the solution file with VS.  
+Just download the repository and open the solution file with VS.  
 Packages you might need for the compilation are .Net Desktop development with C#  
 and C++ development.
 
