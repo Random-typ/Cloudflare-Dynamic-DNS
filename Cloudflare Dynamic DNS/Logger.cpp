@@ -51,11 +51,10 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 	}
 	msg += " " + _msg + "\r\n";
 
-	if (std::filesystem::exists(logfile))
+	if (fileStream.isOpen())
 	{
-		std::fstream fs(logfile);
-		fs << msg;
-		fs.close();
+		fileStream << msg;
+		fileStream.flush();
 	}
 	std::cout << msg;
 }
@@ -69,5 +68,5 @@ void Logger::setupLogfile(std::string _directory)
 
 	logfile = _directory + "/" + getDateTime() + ".txt";
 	std::ofstream of(logfile);
-	of.close();
+        fileStream = of;
 }
