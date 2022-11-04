@@ -104,11 +104,11 @@ namespace Monitor
             {
 
                 if (checkBox1.Checked)
-                    rk.SetValue("Cloudflare Dynamic DNS", Directory.GetCurrentDirectory() + "/Cloudflare Dynamic DNS.exe");
+                    rk.SetValue("CloudflareDynamicDNS", "\"" + Directory.GetCurrentDirectory() + "/Cloudflare Dynamic DNS.exe" + "\"");
                 else
-                    if (rk.GetValue("Cloudflare Dynamic DNS") != null)
+                    if (rk.GetValue("CloudflareDynamicDNS") != null)
                 {
-                    rk.DeleteValue("Cloudflare Dynamic DNS", false);
+                    rk.DeleteValue("CloudflareDynamicDNS", false);
                 }
                 rk.Close();
             }
@@ -136,10 +136,23 @@ namespace Monitor
             WriteOut("Loading config...");
             try
             {
-                JsonNode configjson = JsonObject.Parse(File.ReadAllText(ConfigFile));
-                textBox4.Text = configjson["token"].ToString();
+                string rawconfig = File.ReadAllText(ConfigFile);
+                if (rawconfig == null)
+                {
+                    WriteOut("Failed to load config.");
+                    return;
+                }
+                JsonNode configjson = JsonObject.Parse(rawconfig);
+                if (configjson == null)
+                {
+                    WriteOut("Failed to load config.");
+                    return;
+                }
+                textBox4.Text = configjson["token"]?.ToString();
                 
-                checkBox1.Checked = Convert.ToBoolean(configjson["autostart"].ToString());
+                checkBox1.Checked = Convert.ToBoolean(configjson["autostart"]?.ToString());
+                checkBox2.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
+
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.cloudflare.com/client/v4/zones");
                 request.Headers.Add("Authorization", "Bearer " + textBox4.Text);
@@ -150,6 +163,11 @@ namespace Monitor
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     JsonNode json = JsonObject.Parse(reader.ReadToEnd());
+                    if (json == null)
+                    {
+                        WriteOut("Failed to load config.");
+                        return;
+                    }
                     foreach (var zone in json["result"].AsArray())
                     {
                         string id = zone["id"].ToString();
@@ -183,6 +201,7 @@ namespace Monitor
         {
             string json = 
                 "{\"token\": \"" + textBox4.Text + "\"," +
+                "\"IPv6\": \"" + checkBox2.Checked.ToString() + "\"," +
                 "\"autostart\": \"" + checkBox1.Checked.ToString() + "\", " +
                 "\"asService\": \"" + radioButton2.Checked.ToString() + "\", " +
                 "\"serviceInterval\": \"" + numericUpDown1.Value.ToString() + "\", " +
@@ -340,6 +359,8 @@ namespace Monitor
         private void button3_Click(object sender, EventArgs e)
         {
             WriteConfig();
+            // autostart
+            updateAutostart();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -352,15 +373,8 @@ namespace Monitor
             // service
             if (radioButton2.Checked)
             {
-                InitializeComponent();
-                EventLog eventLog1 = new EventLog();
-                if (!EventLog.SourceExists("MySource"))
-                {
-                    EventLog.CreateEventSource(
-                        "MySource", "MyNewLog");
-                }
-                eventLog1.Source = "MySource";
-                eventLog1.Log = "MyNewLog";
+
+
             }
 
 
@@ -380,12 +394,17 @@ namespace Monitor
         private void button2_Click(object sender, EventArgs e)
         {
             ClearZones();
+            WriteConfig();
             LoadConfig();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Process.Start("/logs/");
+            if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\logs"))
+            {
+                Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\logs");
+            }
+            Process.Start("explorer.exe", Directory.GetCurrentDirectory() + "\\logs");
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -410,6 +429,11 @@ namespace Monitor
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }

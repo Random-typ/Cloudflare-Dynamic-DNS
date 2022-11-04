@@ -9,13 +9,14 @@
 class CDDNS
 {
 public:
-    static std::string tokenHeader;
-
     static bool start();
 
     static bool ipHasChanged(std::string _currentIp);
 
     static bool loadConfig();
 
+    static std::string tokenHeader;
+    static std::string ipify;
+    static std::string ipType;
 }; 
 #endif // !__CDDNS__

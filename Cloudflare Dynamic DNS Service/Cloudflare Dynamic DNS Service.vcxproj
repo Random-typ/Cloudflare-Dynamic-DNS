@@ -71,10 +71,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Random-Typ\source\repos\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Random-Typ\source\repos\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,17 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\RJSON\RJSON\include\RJSON.cpp" />
     <ClCompile Include="..\Cloudflare Dynamic DNS\CDDNS.cpp" />
     <ClCompile Include="..\Cloudflare Dynamic DNS\Logger.cpp" />
-    <ClCompile Include="..\Cloudflare Dynamic DNS\RJSON.cpp" />
     <ClCompile Include="..\Cloudflare Dynamic DNS\RReq.cpp" />
     <ClCompile Include="Cloudflare Dynamic DNS Service.cpp" />
     <ClCompile Include="Service.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\RJSON\RJSON\include\RJSON.h" />
     <ClInclude Include="..\Cloudflare Dynamic DNS\CDDNS.h" />
     <ClInclude Include="..\Cloudflare Dynamic DNS\Logger.h" />
-    <ClInclude Include="..\Cloudflare Dynamic DNS\RJSON.h" />
     <ClInclude Include="..\Cloudflare Dynamic DNS\RReq.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

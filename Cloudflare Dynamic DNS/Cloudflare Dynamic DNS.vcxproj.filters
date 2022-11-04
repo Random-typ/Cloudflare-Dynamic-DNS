@@ -18,9 +18,6 @@
     <ClCompile Include="Cloudflare Dynamic DNS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RJSON.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,11 +27,11 @@
     <ClCompile Include="CDDNS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\RJSON\RJSON\include\RJSON.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RJSON.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CDDNS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\RJSON\RJSON\include\RJSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

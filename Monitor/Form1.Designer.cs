@@ -39,13 +39,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.button6 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -59,7 +60,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -152,6 +152,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.checkBox2);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.numericUpDown1);
             this.panel2.Controls.Add(this.label10);
@@ -159,7 +160,6 @@
             this.panel2.Controls.Add(this.radioButton2);
             this.panel2.Controls.Add(this.radioButton1);
             this.panel2.Controls.Add(this.button6);
-            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.richTextBox1);
             this.panel2.Controls.Add(this.label13);
@@ -177,10 +177,31 @@
             this.panel2.Size = new System.Drawing.Size(720, 462);
             this.panel2.TabIndex = 1;
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(607, 91);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(70, 19);
+            this.checkBox2.TabIndex = 30;
+            this.checkBox2.Text = "Use IPv6";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(382, 91);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(128, 19);
+            this.checkBox1.TabIndex = 29;
+            this.checkBox1.Text = "Start with Windows";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Location = new System.Drawing.Point(380, 90);
+            this.numericUpDown1.Location = new System.Drawing.Point(379, 25);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(75, 23);
             this.numericUpDown1.TabIndex = 28;
@@ -194,7 +215,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(461, 95);
+            this.label10.Location = new System.Drawing.Point(460, 30);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(50, 15);
             this.label10.TabIndex = 27;
@@ -204,7 +225,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(380, 70);
+            this.label7.Location = new System.Drawing.Point(379, 5);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(89, 15);
             this.label7.TabIndex = 26;
@@ -214,7 +235,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(518, 66);
+            this.radioButton2.Location = new System.Drawing.Point(516, 30);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(78, 19);
             this.radioButton2.TabIndex = 24;
@@ -227,7 +248,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(518, 41);
+            this.radioButton1.Location = new System.Drawing.Point(516, 5);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(74, 19);
             this.radioButton1.TabIndex = 23;
@@ -246,17 +267,6 @@
             this.button6.Text = "open logs";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(20, 400);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(191, 34);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "IMPORTANT:\r\nOnly \"A\" types are supported.\r\n";
-            this.label5.Visible = false;
             // 
             // button2
             // 
@@ -326,7 +336,7 @@
             // button5
             // 
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(479, 360);
+            this.button5.Location = new System.Drawing.Point(492, 362);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 11;
@@ -379,16 +389,6 @@
             this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(594, 95);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(73, 19);
-            this.checkBox1.TabIndex = 29;
-            this.checkBox1.Text = "autostart";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -398,7 +398,6 @@
             this.Controls.Add(this.panel2);
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cloudflare Dynamic DNS Monitor";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -434,7 +433,6 @@
         private System.Windows.Forms.Timer timer1;
         private RichTextBox richTextBox1;
         private Button button2;
-        private Label label5;
         private Button button6;
         private Label label4;
         private NumericUpDown numericUpDown1;
@@ -443,5 +441,6 @@
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }
