@@ -23,6 +23,6 @@ public:
 	static void setupLogfile(std::string _directory);
 
 	static std::string logfile;
-static std::ofstream fileStream;
+	static std::ofstream fileStream;
 } typedef LOG;
 

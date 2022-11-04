@@ -2,7 +2,7 @@
   "profiles": {
     "Monitor": {
       "commandName": "Project",
-      "workingDirectory": "$(ProjectDir)"
+      "workingDirectory": "$(SolutionDir)\\x64\\Debug"
     }
   }
 }

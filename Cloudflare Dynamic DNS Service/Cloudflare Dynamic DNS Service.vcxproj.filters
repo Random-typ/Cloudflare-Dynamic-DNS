@@ -15,33 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cloudflare Dynamic DNS.cpp">
+    <ClCompile Include="Cloudflare Dynamic DNS Service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RJSON.cpp">
+    <ClCompile Include="..\Cloudflare Dynamic DNS\CDDNS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.cpp">
+    <ClCompile Include="..\Cloudflare Dynamic DNS\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Logger.cpp">
+    <ClCompile Include="..\Cloudflare Dynamic DNS\RJSON.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDDNS.cpp">
+    <ClCompile Include="..\Cloudflare Dynamic DNS\RReq.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RJSON.h">
+    <ClInclude Include="..\Cloudflare Dynamic DNS\CDDNS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.h">
+    <ClInclude Include="..\Cloudflare Dynamic DNS\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h">
+    <ClInclude Include="..\Cloudflare Dynamic DNS\RJSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CDDNS.h">
+    <ClInclude Include="..\Cloudflare Dynamic DNS\RReq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "Logger.h"
 
 inline std::string Logger::logfile;
+inline std::ofstream Logger::fileStream;
 
 
 Logger::Logger(std::string _msg, ErrorLevel _error, std::string _caller)
@@ -51,12 +52,14 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 	}
 	msg += " " + _msg + "\r\n";
 
-	if (fileStream.isOpen())
+	if (fileStream.is_open())
 	{
 		fileStream << msg;
 		fileStream.flush();
 	}
+#ifndef NOWINDOW
 	std::cout << msg;
+#endif //NOWINDOW
 }
 
 void Logger::setupLogfile(std::string _directory)
@@ -67,6 +70,5 @@ void Logger::setupLogfile(std::string _directory)
 	}
 
 	logfile = _directory + "/" + getDateTime() + ".txt";
-	std::ofstream of(logfile);
-        fileStream = of;
+	fileStream.open(logfile);
 }

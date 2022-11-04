@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json.Nodes;
 using System.IO.Compression;
+using Microsoft.Win32;
 
 namespace Monitor
 {
@@ -90,6 +91,29 @@ namespace Monitor
             richTextBox1.Text += _message + "\n";
         }
 
+        public void updateAutostart()
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if (rk == null)
+            {
+                MessageBox.Show("Couldn't open user registery. Try starting application as administrator.", "Error");
+
+            }
+            else
+            {
+
+                if (checkBox1.Checked)
+                    rk.SetValue("Cloudflare Dynamic DNS", Directory.GetCurrentDirectory() + "/Cloudflare Dynamic DNS.exe");
+                else
+                    if (rk.GetValue("Cloudflare Dynamic DNS") != null)
+                {
+                    rk.DeleteValue("Cloudflare Dynamic DNS", false);
+                }
+                rk.Close();
+            }
+        }
+
         public void DDNSStatus()
         {
             Process[] proc = Process.GetProcessesByName("Cloudflare Dynamic DNS");
@@ -114,6 +138,8 @@ namespace Monitor
             {
                 JsonNode configjson = JsonObject.Parse(File.ReadAllText(ConfigFile));
                 textBox4.Text = configjson["token"].ToString();
+                
+                checkBox1.Checked = Convert.ToBoolean(configjson["autostart"].ToString());
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.cloudflare.com/client/v4/zones");
                 request.Headers.Add("Authorization", "Bearer " + textBox4.Text);
@@ -155,7 +181,12 @@ namespace Monitor
 
         public void WriteConfig()
         {
-            string json = "{\"token\": \"" + textBox4.Text + "\", \"zones\":[";
+            string json = 
+                "{\"token\": \"" + textBox4.Text + "\"," +
+                "\"autostart\": \"" + checkBox1.Checked.ToString() + "\", " +
+                "\"asService\": \"" + radioButton2.Checked.ToString() + "\", " +
+                "\"serviceInterval\": \"" + numericUpDown1.Value.ToString() + "\", " +
+                "\"zones\":[";
             foreach (var item in flowLayoutPanel1.Controls)
             {
                 Panel panel = (Panel)item;
@@ -314,6 +345,25 @@ namespace Monitor
         private void button4_Click(object sender, EventArgs e)
         {
             WriteConfig();
+
+            // autostart
+            updateAutostart();
+
+            // service
+            if (radioButton2.Checked)
+            {
+                InitializeComponent();
+                EventLog eventLog1 = new EventLog();
+                if (!EventLog.SourceExists("MySource"))
+                {
+                    EventLog.CreateEventSource(
+                        "MySource", "MyNewLog");
+                }
+                eventLog1.Source = "MySource";
+                eventLog1.Log = "MyNewLog";
+            }
+
+
             Process.Start("Cloudflare Dynamic DNS.exe");
             WriteOut("Started Dynamic DNS.");
         }
@@ -350,6 +400,18 @@ namespace Monitor
                 label4.Text = "show";
                 textBox2.UseSystemPasswordChar = true;
             }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            numericUpDown1.Enabled = radioButton2.Checked;
+
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
