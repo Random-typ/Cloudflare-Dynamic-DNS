@@ -1,4 +1,4 @@
-# Cloudflare-Dynamic-DNS
+# 🚀Cloudflare-Dynamic-DNS
 With this application you can update your DNS records on Cloudflare dynamically. Finally you can have your domain always pointing to your server ip address while still
 using Cloudflare's services.
 
@@ -16,6 +16,3 @@ and C++ development.
 The configuration is easy thanks to self explanatory user interface:
 
 ![configuration1.png](readme/configuration1.png?raw=true)
-
-# Known issues
-The logger is kind of useless and buggy
