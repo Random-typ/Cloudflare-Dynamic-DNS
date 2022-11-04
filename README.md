@@ -10,15 +10,10 @@ Set it up once, then forget about it and never care again about you DNS records.
 
 # Install
 Click [HERE](https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/tag/latest) and download the latest version.  
-Unpack the zip and start **Monitor.exe**.
+Unpack the zip and start **Monitor.exe**.  
+The **configuration** is explained in the GUI.
 
 # 🧰Building yourself with Visual Studio
 Just download the repository and open the solution file with VS.  
 Packages you might need for the compilation are .Net Desktop development with C#  
 and C++ development.
-
-
-# Configuration
-The configuration is easy thanks to self explanatory user interface:
-
-![configuration1.png](readme/configuration1.png?raw=true)
