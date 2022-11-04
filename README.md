@@ -9,7 +9,7 @@ Set it up once, then forget about it and never care again about you DNS records.
 ### ✅ IPv6 support
 
 # Install
-Click [HERE](https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/tag/latest) and download the latest version.  
+Click [HERE](https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases) and download the latest version.  
 Unpack the zip and start **Monitor.exe**.  
 The **configuration** is explained in the GUI.
 
