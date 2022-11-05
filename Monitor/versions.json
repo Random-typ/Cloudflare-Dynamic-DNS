@@ -17,6 +17,12 @@
       "version": 1.2,
       "skipable": true,
       "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/v1.2/Cloudflare.Dynamic.DNS.v1.2.zip"
+    },
+
+    {
+      "version": 1.3,
+      "skipable": true,
+      "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/v1.3/Cloudflare.Dynamic.DNS.v1.3.zip"
     }
   ]
 }
