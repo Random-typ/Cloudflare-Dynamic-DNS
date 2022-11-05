@@ -14,7 +14,12 @@ namespace Monitor
 
         public async void UpdateApp()
         {
-            double InstalledVersion = 0;
+            
+            if (!checkBox3.Checked)
+            {// autoupdate is disabled
+                return;
+            }
+            double InstalledVersion = 1.3;
 
             string versionsURL = "https://raw.githubusercontent.com/Random-typ/Cloudflare-Dynamic-DNS/master/Monitor/versions.json?";
 
@@ -151,7 +156,9 @@ namespace Monitor
                 textBox4.Text = configjson["token"]?.ToString();
                 
                 checkBox1.Checked = Convert.ToBoolean(configjson["autostart"]?.ToString());
+                checkBox3.Checked = Convert.ToBoolean(configjson["autoupdate"]?.ToString());
                 checkBox2.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
+                
 
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.cloudflare.com/client/v4/zones");
@@ -202,6 +209,7 @@ namespace Monitor
             string json = 
                 "{\"token\": \"" + textBox4.Text + "\"," +
                 "\"IPv6\": \"" + checkBox2.Checked.ToString() + "\"," +
+                "\"autoupdate\": \"" + checkBox3.Checked.ToString() + "\"," +
                 "\"autostart\": \"" + checkBox1.Checked.ToString() + "\", " +
                 "\"asService\": \"" + radioButton2.Checked.ToString() + "\", " +
                 "\"serviceInterval\": \"" + numericUpDown1.Value.ToString() + "\", " +

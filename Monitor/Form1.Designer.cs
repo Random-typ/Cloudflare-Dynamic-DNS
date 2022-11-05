@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
@@ -60,6 +61,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -152,6 +154,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.label5);
+            this.panel2.Controls.Add(this.checkBox3);
             this.panel2.Controls.Add(this.checkBox2);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.numericUpDown1);
@@ -177,6 +181,16 @@
             this.panel2.Size = new System.Drawing.Size(720, 462);
             this.panel2.TabIndex = 1;
             // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(382, 91);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(89, 19);
+            this.checkBox3.TabIndex = 31;
+            this.checkBox3.Text = "Autoupdate";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
@@ -190,7 +204,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(382, 91);
+            this.checkBox1.Location = new System.Drawing.Point(382, 66);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(128, 19);
             this.checkBox1.TabIndex = 29;
@@ -389,6 +403,15 @@
             this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 439);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(28, 15);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "v1.3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -442,5 +465,7 @@
         private RadioButton radioButton1;
         private CheckBox checkBox1;
         private CheckBox checkBox2;
+        private CheckBox checkBox3;
+        private Label label5;
     }
 }

@@ -1,10 +1,22 @@
 ﻿{
-  "latest": 1.0,
+  "latest": 1.2,
   "versions": [
     {
       "version": 1.0,
       "skipable": false,
-      "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/DDNS/Cloudflare.Dynamic.DNS.1.0.zip"
+      "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/v1.0/Cloudflare.Dynamic.DNS.1.0.zip"
+    },
+
+    {
+      "version": 1.1,
+      "skipable": true,
+      "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/v1.1/Cloudflare.Dynamic.DNS.1.1.zip"
+    },
+
+    {
+      "version": 1.2,
+      "skipable": true,
+      "update": "https://github.com/Random-typ/Cloudflare-Dynamic-DNS/releases/download/v1.2/Cloudflare.Dynamic.DNS.v1.2.zip"
     }
   ]
 }
