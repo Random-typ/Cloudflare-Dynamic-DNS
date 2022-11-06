@@ -14,24 +14,34 @@ namespace Monitor
 
         public async void UpdateApp()
         {
+            double InstalledVersion = 1.4;
+            label1.Text = InstalledVersion.ToString();
+            // Cleanup
+            if (File.Exists(Directory.GetCurrentDirectory() + "/update.bat"))
+            {
+                File.Delete(Directory.GetCurrentDirectory() + "/update.bat");
+            }
             
+            if (File.Exists(Directory.GetCurrentDirectory() + "/Update.zip"))
+            {
+                File.Delete(Directory.GetCurrentDirectory() + "/Update.zip");
+            }
+
+            if (Directory.Exists(Directory.GetCurrentDirectory() + "/update"))
+            {
+                Directory.Delete(Directory.GetCurrentDirectory() + "/update", true);
+            }
+
+
+
+
             if (!checkBox3.Checked)
             {// autoupdate is disabled
                 return;
             }
-            double InstalledVersion = 1.3;
 
+            // updating
             string versionsURL = "https://raw.githubusercontent.com/Random-typ/Cloudflare-Dynamic-DNS/master/Monitor/versions.json?";
-
-            if (File.Exists("update.bat"))
-            {
-                File.Delete("update.bat");
-            }
-
-            if (File.Exists("update"))
-            {
-                File.Delete("update");
-            }
 
             HttpClient httpClient = new HttpClient();
 
@@ -51,7 +61,7 @@ namespace Monitor
             }
 
             JsonNode json = JsonObject.Parse(content);
-            double latest = Convert.ToDouble(json["latest"].ToString());
+            double latest = Convert.ToDouble(json["latest"].ToString(), new System.Globalization.CultureInfo("en-US"));
             if (latest == InstalledVersion)
             {// newest version is already installed
                 return;
@@ -65,7 +75,7 @@ namespace Monitor
 
             foreach (var item in json["versions"].AsArray())
             {
-                double version = Convert.ToDouble(item["version"].ToString());
+                double version = Convert.ToDouble(item["version"].ToString(), new System.Globalization.CultureInfo("en-US"));
                 if (version > InstalledVersion && !Convert.ToBoolean(item["skipable"].ToString()) || version == latest)
                 {
                     try
@@ -74,9 +84,9 @@ namespace Monitor
                         WebClient web = new WebClient();
                         web.Headers.Add("User-Agent", "Cloudflare DDNS Update");
                         web.DownloadFile(new Uri(item["update"].ToString()), "Update.zip");
-                        ZipFile.ExtractToDirectory("Update.zip", "/update");
+                        ZipFile.ExtractToDirectory("Update.zip", Directory.GetCurrentDirectory() + "/update");
 
-                        byte[] updatebat = Encoding.ASCII.GetBytes("XCOPY /K /Y \"update\" \"\"\npause\nMonitor.exe");
+                        byte[] updatebat = Encoding.ASCII.GetBytes("@echo off\n:check\ntasklist /fi \"ImageName eq Monitor.exe\" /fo csv 2>NUL | find /I \"Monitor.exe\">NUL\r\nif \"%ERRORLEVEL%\"==\"0\" goto check\nXCOPY /K /Y \"" + Directory.GetCurrentDirectory() + "/update\" \"" + Directory.GetCurrentDirectory() + "\"\nMonitor.exe");
                         File.WriteAllBytes("update.bat", updatebat);
                         Process.Start("update.bat");
                         this.Close();
@@ -327,7 +337,6 @@ namespace Monitor
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            UpdateApp();
             ClientSize = new Size(panel2.Size.Width + 20, panel2.Size.Height + 40);
             MaximumSize = ClientSize;
             MinimumSize = ClientSize;
@@ -341,6 +350,7 @@ namespace Monitor
                 return;
             }
             LoadConfig();
+            UpdateApp();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
