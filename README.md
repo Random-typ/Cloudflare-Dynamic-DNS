@@ -4,7 +4,7 @@ The app is focused on easy setup and low resource usage at runtime.
 Set it up once, then forget about it and never care again about you DNS records.
 
 - ### ✅ Easy to setup
-- ### ✅ Easy to use GUI
+- ### ✅ Easy to use UI
 - ### ✅ IPv4 support
 - ### ✅ IPv6 support
 
