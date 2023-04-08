@@ -18,7 +18,7 @@
     <ClCompile Include="Cloudflare Dynamic DNS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.cpp">
+    <ClCompile Include="RReq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
@@ -32,7 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.h">
+    <ClInclude Include="RReq.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">

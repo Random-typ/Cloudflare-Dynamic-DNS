@@ -200,14 +200,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\RJSON\RJSON\include\RJSON.cpp" />
-    <ClCompile Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.cpp" />
+    <ClCompile Include="RReq.cpp" />
     <ClCompile Include="CDDNS.cpp" />
     <ClCompile Include="Cloudflare Dynamic DNS.cpp" />
     <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\RJSON\RJSON\include\RJSON.h" />
-    <ClInclude Include="..\..\SchoolJam-Bot\SchoolJam-Bot\RReq.h" />
+    <ClInclude Include="RReq.h" />
     <ClInclude Include="CDDNS.h" />
     <ClInclude Include="Logger.h" />
   </ItemGroup>

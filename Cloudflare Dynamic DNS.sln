@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monitor", "Monitor\Monitor.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cloudflare Dynamic DNS Service", "Cloudflare Dynamic DNS Service\Cloudflare Dynamic DNS Service.vcxproj", "{0CFE9F5E-2A72-4979-9DE8-0D8878D01585}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cloudflare Dynamic DNS Linux", "Cloudflare Dynamic DNS Linux\Cloudflare Dynamic DNS Linux.vcxproj", "{947FD5A0-2442-44A8-9D91-622B2AA4098C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -122,6 +124,51 @@ Global
 		{0CFE9F5E-2A72-4979-9DE8-0D8878D01585}.Release|x64.Build.0 = Release|x64
 		{0CFE9F5E-2A72-4979-9DE8-0D8878D01585}.Release|x86.ActiveCfg = Release|Win32
 		{0CFE9F5E-2A72-4979-9DE8-0D8878D01585}.Release|x86.Build.0 = Release|Win32
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|Any CPU.Build.0 = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|Any CPU.Deploy.0 = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM.Build.0 = Debug|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM.Deploy.0 = Debug|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM64.Build.0 = Debug|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x64.ActiveCfg = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x64.Build.0 = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x64.Deploy.0 = Debug|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x86.ActiveCfg = Debug|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x86.Build.0 = Debug|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Debug|x86.Deploy.0 = Debug|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|Any CPU.ActiveCfg = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|Any CPU.Build.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|Any CPU.Deploy.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM.ActiveCfg = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM.Build.0 = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM.Deploy.0 = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM64.ActiveCfg = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM64.Build.0 = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|ARM64.Deploy.0 = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x64.ActiveCfg = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x64.Build.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x64.Deploy.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x86.ActiveCfg = Release|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x86.Build.0 = Release|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release Background|x86.Deploy.0 = Release|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|Any CPU.ActiveCfg = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|Any CPU.Build.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|Any CPU.Deploy.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM.ActiveCfg = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM.Build.0 = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM.Deploy.0 = Release|ARM
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM64.Build.0 = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|ARM64.Deploy.0 = Release|ARM64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x64.ActiveCfg = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x64.Build.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x64.Deploy.0 = Release|x64
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x86.ActiveCfg = Release|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x86.Build.0 = Release|x86
+		{947FD5A0-2442-44A8-9D91-622B2AA4098C}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
