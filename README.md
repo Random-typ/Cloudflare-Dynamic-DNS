@@ -15,6 +15,6 @@ The **configuration** is explained in the GUI.
 
 # 🧰Building yourself with Visual Studio
 You will need RJSON which you can download [HERE](https://github.com/Random-typ/RJSON).
-You need to put the RJSON folder up one folder from the Cloudflare-Dynamic-DNS folder. So that from the Cloudflare-Dynamic-DNS folder (where the solution file is placed), "..\\..\RJSON\RJSON\include\RJSON.h" is a valid path.\n
+You need to put the RJSON folder up one folder from the Cloudflare-Dynamic-DNS folder. So that from the Cloudflare-Dynamic-DNS folder (where the solution file is placed), "..\\..\RJSON\RJSON\include\RJSON.h" is a valid path.  
 You will need Visual Studio with the .Net Desktop development with C#,  
 C++ development and c++ development for Windows.
