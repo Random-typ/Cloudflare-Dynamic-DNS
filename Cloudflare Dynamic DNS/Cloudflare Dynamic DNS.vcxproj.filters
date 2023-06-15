@@ -27,9 +27,6 @@
     <ClCompile Include="CDDNS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\RJSON\RJSON\include\RJSON.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RReq.h">

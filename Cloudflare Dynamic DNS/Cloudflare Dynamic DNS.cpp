@@ -13,11 +13,15 @@ int main()
         LOG("Failed to load config.", LOG::Error, __FUNCTION__);
     }
 
-    for (;; Sleep(1000*60*10))//10 Minutes
+    for (;;)
     {
         if (!CDDNS::start())
         {
-            break;
+            Sleep(1000 * 60);//1 Minute
+            continue;
         }
+        Sleep(1000 * 60 * 10);//10 Minutes
     }
+    LOG("Program closing.", LOG::Info, __FUNCTION__);
+    return 0;
 }

@@ -5,6 +5,14 @@
 #include "RReq.h"
 #include "Logger.h"
 
+#ifdef _DEBUG
+#pragma comment(lib, "RJSON_d.lib")
+#else
+#pragma comment(lib, "RJSON.lib")
+#endif // _DEBUG
+
+
+
 #ifndef __CDDNS__
 #define __CDDNS__
 class CDDNS

@@ -26,9 +26,6 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 {
 	// [DATE TIME][CALLER][ERROR LEVEL] Message.
 
-
-	
-
 	std::string msg = "[" + getDateTime() + "][" + _caller + "]";
 	
 	switch (_error)
@@ -50,7 +47,7 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 		msg += (std::string)"[" + GetVarName(Unknown) + "]";
 		break;
 	}
-	msg += " " + _msg + "\r\n";
+	msg += " " + _msg + "\n";
 
 	if (fileStream.is_open())
 	{
