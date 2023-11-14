@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <fstream>
 
-#define GetVarName(_var) (#_var)
+#define GetVarName(_var) #_var
 class Logger
 {
 public:

@@ -31,20 +31,20 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 	switch (_error)
 	{
 	case Info:
-		msg += (std::string)"[" + GetVarName(Info) + "]";
+		msg += "[" GetVarName(Info) "]";
 		break;
 	case Warning:
-		msg += (std::string)"[" + GetVarName(Warning) + "]";
+		msg += "[" GetVarName(Warning) "]";
 		break;
 	case Error:
-		msg += (std::string)"[" + GetVarName(Error) + "]";
+		msg += "[" GetVarName(Error) "]";
 		break;
 	case Fatal:
-		msg += (std::string)"[" + GetVarName(Fatal) + "]";
+		msg += "[" GetVarName(Fatal) "]";
 		break;
 	case Unknown:
 	default:
-		msg += (std::string)"[" + GetVarName(Unknown) + "]";
+		msg += "[" GetVarName(Unknown) "]";
 		break;
 	}
 	msg += " " + _msg + "\n";
@@ -55,7 +55,7 @@ void Logger::log(std::string _msg, ErrorLevel _error, std::string _caller)
 		fileStream.flush();
 	}
 #ifndef NOWINDOW
-	std::cout << msg;
+	fwrite(msg.data(), msg.size(), 1, stdout);
 #endif //NOWINDOW
 }
 

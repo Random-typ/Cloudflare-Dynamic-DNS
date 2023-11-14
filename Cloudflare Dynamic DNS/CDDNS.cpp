@@ -5,6 +5,7 @@
 std::string CDDNS::tokenHeader;
 std::string CDDNS::ipify = "https://api.ipify.org?format=json";
 std::string CDDNS::ipType = "A";
+std::string CDDNS::lastIp;
 
 bool CDDNS::start()
 {
@@ -34,7 +35,6 @@ bool CDDNS::start()
         LOG("Error retrieving data from Cloudflare: " + zonesreq.Data, LOG::Error, __FUNCTION__);
         return false;
     }
-
 
     std::fstream fs("CloudflareDDNSConfig.json");
 
@@ -82,7 +82,11 @@ bool  CDDNS::ipHasChanged(std::string _currentIp)
 #ifdef _DEBUG
     return true;
 #endif // _DEBUG
-
+    if (lastIp == _currentIp)
+    {
+        return true;
+    }
+    // new ip
     if (!std::filesystem::exists("last.ip"))
     {
         std::ofstream of("last.ip");
@@ -91,20 +95,14 @@ bool  CDDNS::ipHasChanged(std::string _currentIp)
         return true;
     }
 
+    lastIp = _currentIp;
     std::fstream fs("last.ip");
-
-    std::string lastip((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
     fs.close();
 
-    if (lastip != _currentIp)
-    {// new ip
-        fs.open("last.ip", std::ios::out | std::ios::trunc);// empty file
-        fs << _currentIp;
-        fs.close();
-        return true;
-    }
-
-    return false;
+    fs.open("last.ip", std::ios::out | std::ios::trunc);// empty file
+    fs << _currentIp;
+    fs.close();
+    return true;
 }
 
 bool CDDNS::loadConfig()

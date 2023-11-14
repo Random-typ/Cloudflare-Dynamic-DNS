@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.IO.Compression;
 using Microsoft.Win32;
+using System.IO;
 
 namespace Monitor
 {
@@ -21,7 +22,7 @@ namespace Monitor
             {
                 File.Delete(Directory.GetCurrentDirectory() + "/update.bat");
             }
-            
+
             if (File.Exists(Directory.GetCurrentDirectory() + "/Update.zip"))
             {
                 File.Delete(Directory.GetCurrentDirectory() + "/Update.zip");
@@ -54,7 +55,7 @@ namespace Monitor
             {
                 return;
             }
-            
+
             if (content == null)
             {
                 return;
@@ -113,20 +114,14 @@ namespace Monitor
             if (rk == null)
             {
                 MessageBox.Show("Couldn't open user registery. Try starting application as administrator.", "Error");
-
+                return;
             }
+
+            if (checkBox1.Checked)
+                rk.SetValue("CloudflareDynamicDNS", "\"" + Directory.GetCurrentDirectory() + "/Cloudflare Dynamic DNS.exe" + "\"");
             else
-            {
-
-                if (checkBox1.Checked)
-                    rk.SetValue("CloudflareDynamicDNS", "\"" + Directory.GetCurrentDirectory() + "/Cloudflare Dynamic DNS.exe" + "\"");
-                else
-                    if (rk.GetValue("CloudflareDynamicDNS") != null)
-                {
-                    rk.DeleteValue("CloudflareDynamicDNS", false);
-                }
-                rk.Close();
-            }
+                rk.DeleteValue("CloudflareDynamicDNS", false);
+            rk.Close();
         }
 
         public void DDNSStatus()
@@ -164,11 +159,11 @@ namespace Monitor
                     return;
                 }
                 textBox4.Text = configjson["token"]?.ToString();
-                
+
                 checkBox1.Checked = Convert.ToBoolean(configjson["autostart"]?.ToString());
                 checkBox3.Checked = Convert.ToBoolean(configjson["autoupdate"]?.ToString());
                 checkBox2.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
-                
+
 
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.cloudflare.com/client/v4/zones");
@@ -216,7 +211,7 @@ namespace Monitor
 
         public void WriteConfig()
         {
-            string json = 
+            string json =
                 "{\"token\": \"" + textBox4.Text + "\"," +
                 "\"IPv6\": \"" + checkBox2.Checked.ToString() + "\"," +
                 "\"autoupdate\": \"" + checkBox3.Checked.ToString() + "\"," +
@@ -266,7 +261,7 @@ namespace Monitor
             label.Text = "zone id: " + _id;
 
             CheckBox checkbox = new CheckBox();
-
+            
             checkbox.AutoSize = true;
             checkbox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             checkbox.Location = new System.Drawing.Point(3, 8);

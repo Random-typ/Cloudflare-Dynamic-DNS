@@ -38,8 +38,5 @@
     <ClInclude Include="CDDNS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\RJSON\RJSON\include\RJSON.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

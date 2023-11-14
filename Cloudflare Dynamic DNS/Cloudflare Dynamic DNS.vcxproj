@@ -208,7 +208,6 @@
     <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\RJSON\RJSON\include\RJSON.h" />
     <ClInclude Include="RReq.h" />
     <ClInclude Include="CDDNS.h" />
     <ClInclude Include="Logger.h" />
