@@ -6,6 +6,8 @@ using System.Text.Json.Nodes;
 using System.IO.Compression;
 using Microsoft.Win32;
 using System.IO;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Monitor
 {
@@ -140,6 +142,32 @@ namespace Monitor
                 label12.Text = "Status: running";
             }
         }
+        // sends request with cloudflare token and returns content as string
+        public string sendGet(string _url)
+        {
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, _url);
+            request.Headers.Add("Authorization", "Bearer " + textBox4.Text);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = client.Send(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                WriteOut("Failed to send GET request.");
+                return "";
+            }
+            try
+            {
+                using (StreamReader reader = new StreamReader(response.Content.ReadAsStream()))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Cloudflare API token is invalid or local config file is formatted incorrectly.\n\nDetailed error: \n\n" + e.ToString(), "Error");
+                WriteOut("Error loading config.");
+            }
+            return "";
+        }
 
         public void LoadConfig()
         {
@@ -164,39 +192,47 @@ namespace Monitor
                 checkBox3.Checked = Convert.ToBoolean(configjson["autoupdate"]?.ToString());
                 checkBox2.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
 
-
-
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.cloudflare.com/client/v4/zones");
-                request.Headers.Add("Authorization", "Bearer " + textBox4.Text);
-                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
-
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
+                string zones = sendGet("https://api.cloudflare.com/client/v4/zones");
+                if (zones == null)
                 {
-                    JsonNode json = JsonObject.Parse(reader.ReadToEnd());
-                    if (json == null)
+                    WriteOut("Failed to load zones.");
+                    return;
+                }
+                JsonNode json = JsonObject.Parse(zones);
+                if (json == null)
+                {
+                    WriteOut("Failed to load zones.");
+                    return;
+                }
+                foreach (var zone in json["result"].AsArray())
+                {
+                    string id = zone["id"].ToString();
+                    string dnsRecords = sendGet("https://api.cloudflare.com/client/v4/zones/" + id + "/dns_records");
+                    if (dnsRecords == null)
                     {
-                        WriteOut("Failed to load config.");
+                        WriteOut("Failed to load DNS records.");
                         return;
                     }
-                    foreach (var zone in json["result"].AsArray())
+                    JsonNode dnsRecordsJson = JsonObject.Parse(dnsRecords);
+                    if (dnsRecordsJson == null)
                     {
-                        string id = zone["id"].ToString();
-                        bool ischecked = false;
-                        foreach (var allowedzone in configjson["zones"].AsArray())
+                        WriteOut("Failed to load DNS records.");
+                        return;
+                    }
+
+                    bool ischecked = false;
+                    foreach (var allowedzone in configjson["zones"].AsArray())
+                    {
+                        if (allowedzone.ToString() == id)
                         {
-                            if (allowedzone.ToString() == id)
-                            {
-                                ischecked = true;
-                                AddZone(zone["name"].ToString(), id, true);
-                                break;
-                            }
+                            ischecked = true;
+                            AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], true);
+                            break;
                         }
-                        if (!ischecked)
-                        {
-                            AddZone(zone["name"].ToString(), id, false);
-                        }
+                    }
+                    if (!ischecked)
+                    {
+                        AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], false);
                     }
                 }
             }
@@ -221,14 +257,30 @@ namespace Monitor
                 "\"zones\":[";
             foreach (var item in flowLayoutPanel1.Controls)
             {
+                if (item.GetType() != typeof(Panel))
+                {
+                    continue;
+                }
                 Panel panel = (Panel)item;
                 if (!((CheckBox)panel.Controls["checkbox"]).Checked)
                 {
                     continue;
                 }
+                json += "{";
                 string id = panel.Controls["label"].Text;
-                json += "\"" + id.Substring("zone id: ".Length) + "\",";
+                json += "\"id\": \"" + id.Substring("zone id: ".Length) + "\",";
+                json += "\"dns_records\": [";
 
+                foreach (DNSItem record in ((CheckedListBox)panel.Controls["DNSList"]).CheckedItems)
+                {
+                    json += "\"" + record.id + "\",";
+                }
+                if (json.EndsWith(','))
+                {
+                    json = json.Remove(json.Length - 1);
+                }
+                json += "]";
+                json += "}";
             }
             if (json.EndsWith(','))
             {
@@ -241,13 +293,13 @@ namespace Monitor
             WriteOut("Saved config.");
         }
 
-        public void AddZone(string _domain, string _id, bool _checked)
+        public void AddZone(string _domain, string _id, JsonNode _dnsRecords, bool _checked)
         {
             Panel panel = new Panel();
 
-            panel.Location = new System.Drawing.Point(3, 3);
+            //panel.Location = new System.Drawing.Point(3, 3);
             panel.Name = "panel";
-            panel.Size = new System.Drawing.Size(319, 67);
+            panel.Size = new System.Drawing.Size(643, 90);
             panel.TabIndex = 0;
             panel.BorderStyle = BorderStyle.FixedSingle;
 
@@ -256,15 +308,17 @@ namespace Monitor
             label.AutoSize = true;
             label.Location = new System.Drawing.Point(3, 44);
             label.Name = "label";
-            label.Size = new System.Drawing.Size(61, 15);
+            label.Padding = new System.Windows.Forms.Padding(1, 0, 0, 1);
+            label.Dock = DockStyle.Bottom;
             label.TabIndex = 2;
             label.Text = "zone id: " + _id;
 
             CheckBox checkbox = new CheckBox();
-            
+
             checkbox.AutoSize = true;
             checkbox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            checkbox.Location = new System.Drawing.Point(3, 8);
+            checkbox.Padding = new System.Windows.Forms.Padding(2, 3, 0, 0);
+            checkbox.Dock = DockStyle.Top;
             checkbox.Name = "checkbox";
             checkbox.Size = new System.Drawing.Size(109, 21);
             checkbox.TabIndex = 1;
@@ -272,6 +326,43 @@ namespace Monitor
             checkbox.UseVisualStyleBackColor = true;
             checkbox.Checked = _checked;
 
+            Func<string, string, string, string> makeEntry = (string _type, string _name, string _content) =>
+            {
+                string entry = _type + "                                                                                                    ";/*100 spaces*/
+
+                if (_name.Length > 20)
+                {
+                    _name = _name.Substring(0, 17) + "...";
+                }
+
+                if (_content.Length > 38)
+                {
+                    _content = _content.Substring(0, 35) + "...";
+                }
+                entry = entry.Insert(8, _name);
+                entry = entry.Insert(30, _content);
+                return entry;
+            };
+
+            List<DNSItem> items = new List<DNSItem>();
+            foreach (var entry in _dnsRecords.AsArray())
+            {
+                items.Add(new DNSItem
+                {
+                    DisplayText = makeEntry(entry["type"].ToString(), entry["name"].ToString(), entry["content"].ToString()),
+                    id = entry["type"].ToString()
+                });
+            }
+            CheckedListBox checkedListBox = new CheckedListBox();
+            checkedListBox.DataSource = items;
+            checkedListBox.FormattingEnabled = true;
+            checkedListBox.Name = "DNSList";
+            checkedListBox.Size = new Size(400, 100);
+            checkedListBox.Location = new System.Drawing.Point(panel.Size.Width - checkedListBox.Size.Width - 2, 0);
+            checkedListBox.TabIndex = 17;
+
+
+            panel.Controls.Add(checkedListBox);
             panel.Controls.Add(checkbox);
             panel.Controls.Add(label);
             flowLayoutPanel1.Controls.Add(panel);
@@ -280,6 +371,7 @@ namespace Monitor
         public void ClearZones()
         {
             flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(label14);
             WriteOut("Cleared zones.");
         }
 
@@ -332,6 +424,8 @@ namespace Monitor
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //AddZone("test", "a5acf5ed6859954c617df733fef5e6a2", null, false);
+            //return;
             ClientSize = new Size(panel2.Size.Width + 20, panel2.Size.Height + 40);
             MaximumSize = ClientSize;
             MinimumSize = ClientSize;
@@ -346,6 +440,7 @@ namespace Monitor
             }
             LoadConfig();
             UpdateApp();
+            Invoke(new Action(startup.ActiveForm.Close));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -449,6 +544,31 @@ namespace Monitor
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_ControlAdded(object sender, ControlEventArgs e)
+        {
+            label14.Visible = false;
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            Activate();
+        }
+    }
+    public class DNSItem
+    {
+        public string DisplayText { get; set; }
+        public string id { get; set; }
+
+        public override string ToString()
+        {
+            return DisplayText;
         }
     }
 }

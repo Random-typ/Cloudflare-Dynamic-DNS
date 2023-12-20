@@ -71,10 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Random-Typ\source\repos\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\Random-Typ\source\repos\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\RJSON\RJSON\include;$(SolutionDir)Cloudflare Dynamic DNS;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\RJSON\RJSON\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

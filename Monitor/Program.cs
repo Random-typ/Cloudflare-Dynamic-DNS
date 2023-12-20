@@ -11,7 +11,12 @@ namespace Monitor
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            Thread th = new Thread(() => {
+                Application.Run(new startup());
+            });
+            th.Start();
             Application.Run(new Form1());
+            th.Join();
         }
     }
 }

@@ -9,6 +9,7 @@ std::string CDDNS::lastIp;
 
 bool CDDNS::start()
 {
+    return true;
     RReq::RReq ipfy;
 
     ipfy.Win32Req(ipify.c_str(), {}, true);

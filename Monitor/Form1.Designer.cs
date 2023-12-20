@@ -39,6 +39,7 @@
             label1 = new Label();
             textBox2 = new TextBox();
             panel2 = new Panel();
+            label11 = new Label();
             label5 = new Label();
             checkBox3 = new CheckBox();
             checkBox2 = new CheckBox();
@@ -55,6 +56,7 @@
             label9 = new Label();
             textBox4 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            label14 = new Label();
             label12 = new Label();
             button5 = new Button();
             label8 = new Label();
@@ -65,6 +67,7 @@
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -76,7 +79,7 @@
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBox2);
-            panel1.Location = new Point(755, 2);
+            panel1.Location = new Point(1065, 2);
             panel1.Name = "panel1";
             panel1.Size = new Size(720, 462);
             panel1.TabIndex = 0;
@@ -154,6 +157,7 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label11);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(checkBox3);
             panel2.Controls.Add(checkBox2);
@@ -178,8 +182,19 @@
             panel2.Controls.Add(label6);
             panel2.Location = new Point(1, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(720, 462);
+            panel2.Size = new Size(1018, 462);
             panel2.TabIndex = 1;
+            panel2.Paint += panel2_Paint;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.Location = new Point(249, 45);
+            label11.Name = "label11";
+            label11.Size = new Size(245, 17);
+            label11.TabIndex = 33;
+            label11.Text = "DNS: Type      Name                Content";
             // 
             // label5
             // 
@@ -193,7 +208,7 @@
             // checkBox3
             // 
             checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(382, 91);
+            checkBox3.Location = new Point(679, 93);
             checkBox3.Name = "checkBox3";
             checkBox3.Size = new Size(89, 19);
             checkBox3.TabIndex = 31;
@@ -203,7 +218,7 @@
             // checkBox2
             // 
             checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(607, 91);
+            checkBox2.Location = new Point(904, 93);
             checkBox2.Name = "checkBox2";
             checkBox2.Size = new Size(70, 19);
             checkBox2.TabIndex = 30;
@@ -213,7 +228,7 @@
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(382, 66);
+            checkBox1.Location = new Point(679, 68);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(128, 19);
             checkBox1.TabIndex = 29;
@@ -224,7 +239,7 @@
             // numericUpDown1
             // 
             numericUpDown1.Enabled = false;
-            numericUpDown1.Location = new Point(379, 25);
+            numericUpDown1.Location = new Point(676, 27);
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(75, 23);
             numericUpDown1.TabIndex = 28;
@@ -234,7 +249,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(460, 30);
+            label10.Location = new Point(757, 32);
             label10.Name = "label10";
             label10.Size = new Size(50, 15);
             label10.TabIndex = 27;
@@ -244,7 +259,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(379, 5);
+            label7.Location = new Point(676, 7);
             label7.Name = "label7";
             label7.Size = new Size(89, 15);
             label7.TabIndex = 26;
@@ -254,7 +269,7 @@
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(516, 30);
+            radioButton2.Location = new Point(813, 32);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(78, 19);
             radioButton2.TabIndex = 24;
@@ -267,7 +282,7 @@
             // radioButton1
             // 
             radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(516, 5);
+            radioButton1.Location = new Point(813, 7);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(74, 19);
             radioButton1.TabIndex = 23;
@@ -279,7 +294,7 @@
             // 
             // button6
             // 
-            button6.Location = new Point(289, 362);
+            button6.Location = new Point(849, 430);
             button6.Name = "button6";
             button6.Size = new Size(75, 23);
             button6.TabIndex = 21;
@@ -289,7 +304,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(20, 362);
+            button2.Location = new Point(20, 413);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 19;
@@ -299,7 +314,7 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(379, 235);
+            richTextBox1.Location = new Point(676, 237);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.Size = new Size(301, 119);
@@ -309,7 +324,7 @@
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(380, 125);
+            label13.Location = new Point(677, 127);
             label13.Name = "label13";
             label13.Size = new Size(61, 15);
             label13.TabIndex = 18;
@@ -318,7 +333,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(682, 149);
+            label9.Location = new Point(979, 151);
             label9.Name = "label9";
             label9.Size = new Size(35, 15);
             label9.TabIndex = 15;
@@ -327,7 +342,7 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(380, 146);
+            textBox4.Location = new Point(677, 148);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(297, 23);
             textBox4.TabIndex = 14;
@@ -337,16 +352,27 @@
             // 
             flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.BorderStyle = BorderStyle.FixedSingle;
+            flowLayoutPanel1.Controls.Add(label14);
             flowLayoutPanel1.Location = new Point(20, 69);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(344, 285);
+            flowLayoutPanel1.Size = new Size(650, 338);
             flowLayoutPanel1.TabIndex = 0;
+            flowLayoutPanel1.ControlAdded += flowLayoutPanel1_ControlAdded;
+            // 
+            // label14
+            // 
+            label14.Location = new Point(3, 0);
+            label14.Name = "label14";
+            label14.Size = new Size(634, 328);
+            label14.TabIndex = 0;
+            label14.Text = "no records";
+            label14.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label12
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.Location = new Point(573, 364);
+            label12.Location = new Point(870, 366);
             label12.Name = "label12";
             label12.Size = new Size(104, 17);
             label12.TabIndex = 12;
@@ -355,7 +381,7 @@
             // button5
             // 
             button5.Enabled = false;
-            button5.Location = new Point(492, 362);
+            button5.Location = new Point(789, 364);
             button5.Name = "button5";
             button5.Size = new Size(75, 23);
             button5.TabIndex = 11;
@@ -366,7 +392,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(379, 217);
+            label8.Location = new Point(676, 219);
             label8.Name = "label8";
             label8.Size = new Size(48, 15);
             label8.TabIndex = 8;
@@ -375,7 +401,7 @@
             // button4
             // 
             button4.Enabled = false;
-            button4.Location = new Point(380, 362);
+            button4.Location = new Point(677, 364);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 6;
@@ -385,7 +411,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(633, 428);
+            button3.Location = new Point(930, 430);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 5;
@@ -396,12 +422,12 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(20, 25);
+            label6.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Location = new Point(20, 7);
             label6.Name = "label6";
-            label6.Size = new Size(181, 37);
+            label6.Size = new Size(334, 30);
             label6.TabIndex = 3;
-            label6.Text = "Select zones:";
+            label6.Text = "Selected zones and DNS records:";
             // 
             // timer1
             // 
@@ -412,7 +438,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1476, 465);
+            ClientSize = new Size(1856, 465);
             Controls.Add(panel1);
             Controls.Add(panel2);
             Name = "Form1";
@@ -420,11 +446,13 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cloudflare Dynamic DNS Monitor";
             Load += Form1_Load;
+            Shown += Form1_Shown;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -462,5 +490,7 @@
         private CheckBox checkBox2;
         private CheckBox checkBox3;
         private Label label5;
+        private Label label11;
+        private Label label14;
     }
 }
