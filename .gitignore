@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /Monitor/CloudflareDDNSConfig.json
+/Monitor/last.ip
+/Monitor/Update.zip
