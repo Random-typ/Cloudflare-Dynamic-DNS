@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Monitor
 {
@@ -190,7 +191,9 @@ namespace Monitor
 
                 checkBox1.Checked = Convert.ToBoolean(configjson["autostart"]?.ToString());
                 checkBox3.Checked = Convert.ToBoolean(configjson["autoupdate"]?.ToString());
-                checkBox2.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
+                radioButton3.Checked = Convert.ToBoolean(configjson["IPv6"]?.ToString());
+                radioButton5.Checked = Convert.ToBoolean(configjson["IPv4"]?.ToString());
+                radioButton4.Checked = Convert.ToBoolean(configjson["IPauto"]?.ToString());
 
                 string zones = sendGet("https://api.cloudflare.com/client/v4/zones");
                 if (zones == null)
@@ -223,16 +226,16 @@ namespace Monitor
                     bool ischecked = false;
                     foreach (var allowedzone in configjson["zones"].AsArray())
                     {
-                        if (allowedzone.ToString() == id)
+                        if (allowedzone["id"].ToString() == id)
                         {
                             ischecked = true;
-                            AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], true);
+                            AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], allowedzone["dns_records"].AsArray(), true);
                             break;
                         }
                     }
                     if (!ischecked)
                     {
-                        AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], false);
+                        AddZone(zone["name"].ToString(), id, dnsRecordsJson["result"], new JsonArray(), false);
                     }
                 }
             }
@@ -248,8 +251,11 @@ namespace Monitor
         public void WriteConfig()
         {
             string json =
-                "{\"token\": \"" + textBox4.Text + "\"," +
-                "\"IPv6\": \"" + checkBox2.Checked.ToString() + "\"," +
+                "{\"version\": \"1.1\"," +
+                "\"token\": \"" + textBox4.Text + "\"," +
+                "\"IPv6\": \"" + radioButton3.Checked.ToString() + "\"," +
+                "\"IPv4\": \"" + radioButton5.Checked.ToString() + "\"," +
+                "\"IPauto\": \"" + radioButton4.Checked.ToString() + "\"," +
                 "\"autoupdate\": \"" + checkBox3.Checked.ToString() + "\"," +
                 "\"autostart\": \"" + checkBox1.Checked.ToString() + "\", " +
                 "\"asService\": \"" + radioButton2.Checked.ToString() + "\", " +
@@ -262,7 +268,7 @@ namespace Monitor
                     continue;
                 }
                 Panel panel = (Panel)item;
-                if (!((CheckBox)panel.Controls["checkbox"]).Checked)
+                if (!((System.Windows.Forms.CheckBox)panel.Controls["checkbox"]).Checked)
                 {
                     continue;
                 }
@@ -293,7 +299,7 @@ namespace Monitor
             WriteOut("Saved config.");
         }
 
-        public void AddZone(string _domain, string _id, JsonNode _dnsRecords, bool _checked)
+        public void AddZone(string _domain, string _id, JsonNode _dnsRecords, JsonArray _dnsRecordsConfig, bool _checked)
         {
             Panel panel = new Panel();
 
@@ -313,7 +319,7 @@ namespace Monitor
             label.TabIndex = 2;
             label.Text = "zone id: " + _id;
 
-            CheckBox checkbox = new CheckBox();
+            System.Windows.Forms.CheckBox checkbox = new System.Windows.Forms.CheckBox();
 
             checkbox.AutoSize = true;
             checkbox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -347,20 +353,42 @@ namespace Monitor
             List<DNSItem> items = new List<DNSItem>();
             foreach (var entry in _dnsRecords.AsArray())
             {
-                items.Add(new DNSItem
+                bool isChecked = false;
+                foreach (var dnsRecord in _dnsRecordsConfig)
+                {
+                    if (entry["id"].ToString() == dnsRecord.ToString())
+                    {
+                        isChecked = true;
+                        break;
+                    }
+                }
+                var item = new DNSItem
                 {
                     DisplayText = makeEntry(entry["type"].ToString(), entry["name"].ToString(), entry["content"].ToString()),
-                    id = entry["type"].ToString()
-                });
+                    id = entry["id"].ToString(),
+                    IsChecked = isChecked
+                };
+                items.Add(item);
             }
+
             CheckedListBox checkedListBox = new CheckedListBox();
+            checkedListBox.DisplayMember = "DisplayText";
+            checkedListBox.ValueMember = "IsChecked";
             checkedListBox.DataSource = items;
             checkedListBox.FormattingEnabled = true;
             checkedListBox.Name = "DNSList";
             checkedListBox.Size = new Size(400, 100);
             checkedListBox.Location = new System.Drawing.Point(panel.Size.Width - checkedListBox.Size.Width - 2, 0);
             checkedListBox.TabIndex = 17;
+            // ensure data is bound before iterating items
+            checkedListBox.BindingContext = new BindingContext();
 
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
+            {
+                DNSItem item = (DNSItem)checkedListBox.Items[i];
+
+                checkedListBox.SetItemChecked(i, item.IsChecked);
+            }
 
             panel.Controls.Add(checkedListBox);
             panel.Controls.Add(checkbox);
@@ -560,15 +588,31 @@ namespace Monitor
         {
             Activate();
         }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     public class DNSItem
     {
         public string DisplayText { get; set; }
         public string id { get; set; }
 
+        public bool IsChecked { get; set; }
         public override string ToString()
         {
             return DisplayText;
         }
+        public override bool Equals(object _object)
+        {
+            return _object.ToString() == id;
+        }
+
     }
 }

@@ -6,6 +6,7 @@ int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int n
 int main()
 #endif // NOWINDOW
 {
+    LOG("Starting...", LOG::Info, __FUNCTION__);
     Logger::setupLogfile("logs");
 
     if (!CDDNS::loadConfig())
@@ -16,12 +17,12 @@ int main()
     for (;;)
     {
         if (!CDDNS::start())
-        {
-            Sleep(1000 * 60);//1 Minute
+        {// Failed
+            std::this_thread::sleep_for(std::chrono::milliseconds(5000));
             continue;
         }
-        Sleep(1000 * 60 * 10);//10 Minutes
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
-    LOG("Program closing.", LOG::Info, __FUNCTION__);
+    //LOG("Program closing.", LOG::Info, __FUNCTION__);
     return 0;
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <thread>
 //  https://github.com/Random-typ/RJSON
 #include "RJSON.h"
 #include "RReq.h"
@@ -18,12 +19,17 @@
 class CDDNS
 {
 public:
+    // @returns true on error
     static bool start();
-    // returns true if ip has changed
+    static void upgradeConfigVersion();
+
+    static bool updateZone(RJSON::JSONElement& _zone);
+    // returns true if ip has changed. Sets lastIp to current ip if ip changed
     static bool ipHasChanged(std::string _currentIp);
 
     static bool loadConfig();
 
+    static bool ipv6;
     static std::string tokenHeader;
     static std::string ipify;
     static std::string ipType;

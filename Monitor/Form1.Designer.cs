@@ -42,7 +42,6 @@
             label11 = new Label();
             label5 = new Label();
             checkBox3 = new CheckBox();
-            checkBox2 = new CheckBox();
             checkBox1 = new CheckBox();
             numericUpDown1 = new NumericUpDown();
             label10 = new Label();
@@ -64,6 +63,9 @@
             button3 = new Button();
             label6 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            radioButton3 = new RadioButton();
+            radioButton4 = new RadioButton();
+            radioButton5 = new RadioButton();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -157,10 +159,12 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(radioButton5);
+            panel2.Controls.Add(radioButton4);
+            panel2.Controls.Add(radioButton3);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(checkBox3);
-            panel2.Controls.Add(checkBox2);
             panel2.Controls.Add(checkBox1);
             panel2.Controls.Add(numericUpDown1);
             panel2.Controls.Add(label10);
@@ -214,16 +218,6 @@
             checkBox3.TabIndex = 31;
             checkBox3.Text = "Autoupdate";
             checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(904, 93);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(70, 19);
-            checkBox2.TabIndex = 30;
-            checkBox2.Text = "Use IPv6";
-            checkBox2.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -434,6 +428,41 @@
             timer1.Interval = 200;
             timer1.Tick += timer1_Tick;
             // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(905, 70);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(69, 19);
+            radioButton3.TabIndex = 34;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "Use IPv6";
+            radioButton3.UseVisualStyleBackColor = true;
+            radioButton3.CheckedChanged += radioButton3_CheckedChanged;
+            // 
+            // radioButton4
+            // 
+            radioButton4.AutoSize = true;
+            radioButton4.Location = new Point(905, 107);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(103, 19);
+            radioButton4.TabIndex = 35;
+            radioButton4.TabStop = true;
+            radioButton4.Text = "auto IP version";
+            radioButton4.UseVisualStyleBackColor = true;
+            radioButton4.CheckedChanged += radioButton4_CheckedChanged;
+            // 
+            // radioButton5
+            // 
+            radioButton5.AutoSize = true;
+            radioButton5.Location = new Point(905, 89);
+            radioButton5.Name = "radioButton5";
+            radioButton5.Size = new Size(69, 19);
+            radioButton5.TabIndex = 36;
+            radioButton5.TabStop = true;
+            radioButton5.Text = "Use IPv4";
+            radioButton5.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -487,10 +516,12 @@
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private CheckBox checkBox1;
-        private CheckBox checkBox2;
         private CheckBox checkBox3;
         private Label label5;
         private Label label11;
         private Label label14;
+        private RadioButton radioButton4;
+        private RadioButton radioButton3;
+        private RadioButton radioButton5;
     }
 }
